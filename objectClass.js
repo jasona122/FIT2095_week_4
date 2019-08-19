@@ -27,7 +27,7 @@ class WarehouseDatabase{
             let item = this.database[i];
             if(item.id == itemID){
                 this.database.splice(i, 1);
-                return true;
+                return item;
             }
         }
         throw new RangeError("Item is not in the database"); //handle accordingly (could be 404 or redirect to homepage)
@@ -47,6 +47,10 @@ class WarehouseDatabase{
     }
 
     generateList(){
+        if(this.database.length == 0){
+            return "Database is currently empty";
+        }
+        
         let dataString = "ID | Name | Quantity | Price | Cost</br>";
         for(let i = 0; i < this.database.length; i++){
             let item = this.database[i];

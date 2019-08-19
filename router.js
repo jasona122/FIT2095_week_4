@@ -17,7 +17,7 @@ router.get("/newItem/:itemName/:quantity/:price", function(req, res){
 
     let itemToAdd = new Warehouse.Item(itemName, itemQuantity, itemPrice);
     database.addItem(itemToAdd);
-    res.send(database.generateList());
+    res.send("You have added " + itemToAdd.name);
 });
 
 
@@ -29,8 +29,8 @@ router.get("/listItems/", function(req, res){
 router.get("/deleteItem/:itemID", function(req, res){
     itemID = req.params.itemID;
     try{
-        database.deleteItem(itemID);
-        res.send(database.generateList());
+        let deletedItem = database.deleteItem(itemID);
+        res.send("You have deleted " + deletedItem.name);
     }
     catch(err){
         res.send(err.message);
